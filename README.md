@@ -1,0 +1,1 @@
+This uses websockets and json to get messages received in a discord server in real time
