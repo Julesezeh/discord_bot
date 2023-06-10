@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 # Fetches environment variables
 load_dotenv()
-# This sends messages to specified discord servers
+# This sends messages to specified discord servers using python requests
 channel_id = os.getenv("LE_SLIME_CHANNEL_ID")
 server_url = f"https://discord.com/api/v9/channels/{channel_id}/messages"
 print(server_url)
