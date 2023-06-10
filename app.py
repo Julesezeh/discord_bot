@@ -32,6 +32,7 @@ payload = {
 
 send_json_request(ws, payload)
 
+# To get messages from the server
 while True:
     event = receive_json_response(ws)
     try:
