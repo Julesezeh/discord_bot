@@ -18,7 +18,7 @@ def receive_json_response(ws):
 
 
 ws = websocket.WebSocket()
-ws.connect("wss://gateway.discord.gg/?v=6&encoding=json")
+ws.connect("wss://gateway.discord.gg/?v=9&encoding=json")
 heartbeat_interval = receive_json_response(ws)["d"]
 token = token_
 payload = {
