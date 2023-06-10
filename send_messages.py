@@ -12,7 +12,7 @@ auth_token = os.getenv("TOKEN")
 
 
 # specifies the message to be sent of the request
-payload = {"content": "BRozay"}
+payload = {"content": "Brodie"}
 # specifies the main header attribute
 header = {"Authorization": auth_token}
 
