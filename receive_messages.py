@@ -13,6 +13,7 @@ def send_json_request(ws, request):
 
 def receive_json_response(ws):
     response = ws.recv()
+    print(json.loads(response), 3)
     if response:
         return json.loads(response)
 
@@ -37,10 +38,11 @@ while True:
     print("YES")
     try:
         event = receive_json_response(ws)
-
-        # print(event)
+        print(ws, 1)
+        print(event, 0)
         content = event["d"]["content"]
         author = event["d"]["author"]["username"]
         print(f"{author}: {content}")
     except Exception as e:
-        print(e)
+        pass
+    break
