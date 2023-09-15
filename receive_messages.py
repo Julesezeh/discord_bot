@@ -35,11 +35,12 @@ send_json_request(ws, payload)
 # To get messages from the server
 while True:
     print("YES")
-    event = receive_json_response(ws)
     try:
+        event = receive_json_response(ws)
+
         # print(event)
         content = event["d"]["content"]
         author = event["d"]["author"]["username"]
         print(f"{author}: {content}")
-    except:
-        pass
+    except Exception as e:
+        print(e)
