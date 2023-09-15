@@ -13,14 +13,13 @@ def send_json_request(ws, request):
 
 def receive_json_response(ws):
     response = ws.recv()
-    print(json.loads(response), 3)
     if response:
         return json.loads(response)
 
 
 ws = websocket.WebSocket()
 ws.connect("wss://gateway.discord.gg/?v=9&encoding=json")
-heartbeat_interval = receive_json_response(ws)["d"]
+# heartbeat_interval = receive_json_response(ws)["d"]
 token = token_
 payload = {
     "op": 2,
@@ -38,11 +37,10 @@ while True:
     print("YES")
     try:
         event = receive_json_response(ws)
-        print(ws, 1)
         print(event, 0)
         content = event["d"]["content"]
         author = event["d"]["author"]["username"]
         print(f"{author}: {content}")
     except Exception as e:
-        pass
+        print(str(e))
     break
