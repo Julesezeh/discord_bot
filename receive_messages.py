@@ -19,7 +19,7 @@ def receive_json_response(ws):
 
 ws = websocket.WebSocket()
 ws.connect("wss://gateway.discord.gg/?v=9&encoding=json")
-# heartbeat_interval = receive_json_response(ws)["d"]
+heartbeat_interval = receive_json_response(ws)["d"]
 token = token_
 payload = {
     "op": 2,
@@ -43,4 +43,4 @@ while True:
         print(f"{author}: {content}")
     except Exception as e:
         print(str(e))
-    break
+    # break
