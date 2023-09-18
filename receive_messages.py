@@ -18,7 +18,7 @@ def receive_json_response(ws):
 
 
 ws = websocket.WebSocket()
-ws.connect("wss://gateway.discord.gg/")
+ws.connect("wss://gateway.discord.gg/?v=6&encoding=json")
 heartbeat_interval = receive_json_response(ws)["d"]
 token = token_
 payload = {
@@ -34,9 +34,10 @@ send_json_request(ws, payload)
 
 # To get messages from the server
 while True:
+    event = receive_json_response(ws)
+
     print("YES")
     try:
-        event = receive_json_response(ws)
         print(event, 0)
         content = event["d"]["content"]
         author = event["d"]["author"]["username"]
