@@ -1,4 +1,4 @@
-import websocket, os, json
+import websocket, os, json, threading, time
 from dotenv import load_dotenv
 import send_messages
 
@@ -17,6 +17,13 @@ def receive_json_response(ws):
         return json.loads(response)
 
 
+def heartbeat(ws, heartbeat_):
+    print("Heartbeat begins")
+    while True:
+        time.sleep(heartbeat_)
+        heartbeat_payload = {"op": 1, "d": "null"}
+
+
 async def await_close(ws):
     await ws.wait_closed()
 
@@ -32,7 +39,6 @@ payload = {
     "op": 2,
     "d": {
         "token": token,
-        "intents": "513",
         "properties": {"os": "Windows", "browser": "chrome", "device": "pc"},
     },
 }
@@ -46,10 +52,12 @@ ws.ping()
 while True:
     event = receive_json_response(ws)
     try:
-        content = event["d"]["content"]
-        author = event["d"]["author"]["username"]
-        print(f"{author}: {content}")
-        send_messages.send_message(content)
+        if event["t"] == "MESSAGE_CREATE":
+            print(event)
+            content = event["d"]["content"]
+            author = event["d"]["author"]["username"]
+            print(f"{author}: {content}")
+            send_messages.send_message(content)
     except Exception as e:
-        print(str(e))
+        print(e)
 # break
