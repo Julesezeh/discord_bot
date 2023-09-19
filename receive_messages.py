@@ -1,5 +1,6 @@
 import websocket, os, json
 from dotenv import load_dotenv
+import send_messages
 
 load_dotenv()
 token_ = os.getenv("TOKEN")
@@ -48,6 +49,7 @@ while True:
         content = event["d"]["content"]
         author = event["d"]["author"]["username"]
         print(f"{author}: {content}")
+        send_messages.send_message(content)
     except Exception as e:
         print(str(e))
 # break
