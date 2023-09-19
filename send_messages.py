@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+import askai
 
 # Fetches environment variables
 load_dotenv()
@@ -17,3 +18,9 @@ payload = {"content": "Brodie"}
 header = {"Authorization": auth_token}
 
 req = requests.post(server_url, data=payload, headers=header)
+
+
+def send_message(message):
+    response = askai.ask(message)
+    payload = {"content": response}
+    req = requests.post(server_url, data=payload, headers=header)
