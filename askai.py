@@ -9,7 +9,7 @@ openai.api_key = apikey
 
 def ask(message):
     response = openai.Completion.create(
-        model="text-davinci-003",
+        model="gpt-3.5-turbo",
         prompt=message,
         n=1,
     )
