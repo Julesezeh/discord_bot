@@ -1,7 +1,8 @@
 import requests
 import os
 from dotenv import load_dotenv
-import askai
+
+# import askai
 
 # Fetches environment variables
 load_dotenv()
@@ -21,14 +22,23 @@ header = {"Authorization": auth_token}
 
 
 def send_message(message):
-    response = askai.ask(message)
-    payload = {"content": response}
+    # response = askai.ask(message)
+    # payload = {"content": response}
     header = {"Authorization": auth_token}
     channel_id = os.getenv("LE_SLIME_CHANNEL_ID")
     server_url = f"https://discord.com/api/v9/channels/{channel_id}/messages"
-    if response:
-        req = requests.post(server_url, data=payload, headers=header)
-    else:
-        req = requests.post(
-            url=server_url, headers=header, data={"content": "Ungenerated response"}
-        )
+    req = requests.post(
+        url=server_url, headers=header, data={"content": "Sent from script!"}
+    )
+
+
+def main():
+    send = input("::> ")
+    header = {"Authorization": auth_token}
+    channel_id = os.getenv("LE_SLIME_CHANNEL_ID")
+    server_url = f"https://discord.com/api/v9/channels/{channel_id}/messages"
+    req = requests.post(url=server_url, headers=header, data={"content": send})
+
+
+if __name__ == "__main__":
+    main()
