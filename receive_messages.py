@@ -31,7 +31,7 @@ def add_to_file(data):
         "timestamp": date,
     }
     with open("history.txt", "w+") as file:
-        file.append(text)
+        file.write(json.dumps(text))
         file.close()
 
 
