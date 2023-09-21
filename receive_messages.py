@@ -17,7 +17,7 @@ def receive_json_response(ws):
         return json.loads(response)
 
 
-async def add_to_file(data):
+def add_to_file(data):
     try:
         author = data["d"]["author"]["username"]
         id = data["d"]["author"]["id"]
@@ -30,7 +30,7 @@ async def add_to_file(data):
         "message": message,
         "timestamp": date,
     }
-    with await open("history.txt", "w+") as file:
+    with open("history.txt", "w+") as file:
         file.append(text)
         file.close()
 
