@@ -23,14 +23,20 @@ def add_to_file(data):
         id = data["d"]["author"]["id"]
         message = data["d"]["content"]
         date = data["d"]["timestamp"]
+
     except KeyError as e:
         return str(e)
+    print("How many times does this run?")
+    print(author)
+    print(id)
+    print(message)
+    print(date)
     text = {
         "user": {"username": author, "id": id},
         "message": message,
         "timestamp": date,
     }
-    with open("history.txt", "w+") as file:
+    with open("history.txt", "a+") as file:
         file.write(json.dumps(text))
         file.close()
 
@@ -75,13 +81,13 @@ while True:
     event = receive_json_response(ws)
     try:
         if event["t"] == "MESSAGE_CREATE":
-            print(event)
+            # print(event)
             content = event["d"]["content"]
             author = event["d"]["author"]["username"]
             print(f"{author}: {content}")
             add_to_file(event)
             if event["d"]["channel_id"] == "1076208583412297860":
-                print("valid ID")
+                # print("valid ID")
                 send_messages.send_message(content)
             else:
                 print(event["d"]["channel_id"])
